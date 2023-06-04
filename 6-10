@@ -1,0 +1,26 @@
+SELECT DISTINCT product.maker, laptop.speed
+FROM laptop INNER JOIN product ON laptop.model = product.model
+WHERE hd >= '10';
+
+SELECT DISTINCT pc.model, pc.price
+FROM PC INNER JOIN product ON pc.model = product.model
+WHERE product.maker ='B';
+UNION
+SELECT DISTINCT laptop.model, laptop.price
+FROM Laptop INNER JOIN product ON laptop.model = product.model
+WHERE product.maker ='B'
+UNION
+SELECT DISTINCT printer.model, printer.price
+FROM Printer INNER JOIN product ON printer.model = product.model
+WHERE product.maker ='B';
+
+SELECT DISTINCT product.maker FROM product
+WHERE product.type ='pc' AND
+maker NOT IN (SELECT product.maker FROM product
+WHERE product.type ='laptop');
+
+SELECT DISTINCT product.maker FROM product INNER JOIN pc ON product.model = pc.model
+WHERE pc.speed > = '450';
+
+SELECT DISTINCT printer.model, printer.price FROM printer
+WHERE printer.price = (SELECT MAX(printer.price)FROM printer)；
